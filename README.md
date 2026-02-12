@@ -7,12 +7,12 @@
 
 ## 🎯 Project Overview
 
-This repository documents a comprehensive enterprise data migration initiative, transitioning **12.5 TB** of sensitive healthcare data from an on-premises Hadoop cluster to Google Cloud Platform's BigQuery data warehouse. The project encompassed complete security controls, regulatory compliance frameworks, and data governance integration.
+This repository documents a comprehensive enterprise data migration initiative, transitioning of sensitive telecom data from an on-premises Hadoop cluster to Google Cloud Platform's BigQuery data warehouse. The project encompassed security controls, regulatory compliance frameworks, and data governance integration.
 
 ### Business Impact
-- **Migration Scope**: 85+ tables, 240 million records
-- **Performance Improvement**: 73% reduction in query execution time
-- **Cost Optimization**: 42% reduction in infrastructure costs
+- **Migration Scope**: XX tables, XX million records
+- **Performance Improvement**: XX% reduction in query execution time
+- **Cost Optimization**: XX% reduction in infrastructure costs
 - **Compliance Achievement**: Full HIPAA/PHI compliance certification
 - **Timeline**: 6-month phased migration with zero data loss
 
@@ -21,65 +21,61 @@ This repository documents a comprehensive enterprise data migration initiative, 
 ## 🏗️ Architecture Overview
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                    ON-PREMISES ENVIRONMENT                       │
+┌────────────────────────────────────────────────────────────────┐
+│                    ON-PREMISES ENVIRONMENT                     │
 │  ┌──────────────────────────────────────────────────────────┐  │
-│  │  Hadoop Cluster (HDFS)                                    │  │
-│  │  - 45 nodes, 12.5TB data                                 │  │
+│  │  Hadoop Cluster (HDFS)                                   │  │
+│  │  - XX nodes, XXTB data                                   │  │
 │  │  - Hive metastore                                        │  │
 │  │  - Parquet & ORC formats                                 │  │
-│  └────────────────┬─────────────────────────────────────────┘  │
-└────────────────────┼─────────────────────────────────────────────┘
+│  └─────────────────┬────────────────────────────────────────┘  │
+└────────────────────┼───────────────────────────────────────────┘
                      │
                      │ VPN / Cloud Interconnect
                      ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                   GOOGLE CLOUD PLATFORM                          │
-│                                                                   │
-│  ┌──────────────────────────────────────────────────────────┐  │
-│  │  Cloud Storage (Staging Layer)                           │  │
-│  │  - Regional buckets with versioning                      │  │
-│  │  - Customer-managed encryption keys (CMEK)              │  │
-│  └────────────────┬─────────────────────────────────────────┘  │
-│                   │                                              │
-│                   ▼                                              │
-│  ┌──────────────────────────────────────────────────────────┐  │
-│  │  Cloud Dataflow                                          │  │
-│  │  - Apache Beam pipelines                                │  │
-│  │  - Data validation & quality checks                     │  │
-│  │  - PII/PHI detection and masking                        │  │
-│  └────────────────┬─────────────────────────────────────────┘  │
-│                   │                                              │
-│                   ▼                                              │
-│  ┌──────────────────────────────────────────────────────────┐  │
-│  │  Cloud DLP (Data Loss Prevention)                        │  │
-│  │  - PII detection (SSN, PHI, Credit Cards)               │  │
-│  │  - Field-level encryption                               │  │
-│  │  - Format-preserving tokenization                       │  │
-│  └────────────────┬─────────────────────────────────────────┘  │
-│                   │                                              │
-│                   ▼                                              │
-│  ┌──────────────────────────────────────────────────────────┐  │
-│  │  BigQuery (Target Data Warehouse)                        │  │
-│  │  - Row/column-level security                            │  │
-│  │  - Audit logging enabled                                │  │
-│  │  - Data encryption at rest & in transit                 │  │
-│  └────────────────┬─────────────────────────────────────────┘  │
-│                   │                                              │
-│                   ▼                                              │
-│  ┌──────────────────────────────────────────────────────────┐  │
-│  │  Collibra Data Catalog                                   │  │
-│  │  - Metadata synchronization                             │  │
-│  │  - Data lineage tracking                                │  │
-│  │  - Policy enforcement                                   │  │
-│  └──────────────────────────────────────────────────────────┘  │
-│                                                                   │
-│  ┌──────────────────────────────────────────────────────────┐  │
-│  │  IAM & Security Controls                                 │  │
-│  │  - Custom roles & least privilege                       │  │
-│  │  - Service accounts per pipeline                        │  │
-│  │  - VPC Service Controls                                 │  │
-│  └──────────────────────────────────────────────────────────┘  │
+│                   GOOGLE CLOUD PLATFORM                         │
+│                                                                 │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │  Cloud Storage (Staging Layer)                           │   │
+│  │  - Regional buckets with versioning                      │   │
+│  └────────────────┬─────────────────────────────────────────┘   │
+│                   │                                             │
+│                   ▼                                             │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │  Cloud Dataflow                                          │   │
+│  │  - Apache Beam pipelines                                 │   │
+│  │  - Data validation & quality checks                      │   │
+│  │  - PII/PHI detection and masking                         │   │
+│  └────────────────┬─────────────────────────────────────────┘   │
+│                   │                                             │
+│                   ▼                                             │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │  Cloud DLP (Data Loss Prevention)                        │   │
+│  │  - PII detection (SSN, PHI, Credit Cards)                │   │
+│  └────────────────┬─────────────────────────────────────────┘   │
+│                   │                                             │
+│                   ▼                                             │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │  BigQuery (Target Data Warehouse)                        │   │
+│  │  - Audit logging enabled                                 │   │
+│  │  - Data encryption at rest & in transit                  │   │
+│  └────────────────┬─────────────────────────────────────────┘   │
+│                   │                                             │
+│                   ▼                                             │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │  Collibra Data Catalog                                   │   │
+│  │  - Metadata synchronization                              │   │
+│  │  - Data lineage tracking                                 │   │
+│  │  - Policy enforcement                                    │   │
+│  └──────────────────────────────────────────────────────────┘   │
+│                                                                 │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │  IAM & Security Controls                                 │   │
+│  │  - Custom roles & least privilege                        │   │
+│  │  - Service accounts per pipeline                         │   │ 
+│  │  - VPC Service Controls                                  │   │
+│  └──────────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -95,7 +91,6 @@ This repository documents a comprehensive enterprise data migration initiative, 
 
 ### 2. Security & Compliance
 - **IAM**: Custom roles, service accounts, workload identity
-- **Encryption**: CMEK for data at rest, TLS 1.3 for data in transit
 - **PII/PHI Masking**: Cloud DLP with 15+ detection templates
 - **Compliance**: HIPAA BAA, audit logging, access controls
 
@@ -328,19 +323,7 @@ def validate_row_counts(source_table, target_table):
     assert discrepancy <= threshold, f"Row count mismatch: {discrepancy}"
 ```
 
----
 
-## 📚 Documentation
-
-- **[Architecture Documentation](docs/ARCHITECTURE.md)**: Deep dive into system design
-- **[Migration Strategy](docs/MIGRATION_STRATEGY.md)**: Phased approach and rollback plans
-- **[Security Controls](docs/SECURITY_CONTROLS.md)**: Comprehensive security implementation
-- **[Compliance Framework](docs/COMPLIANCE_FRAMEWORK.md)**: HIPAA/PHI compliance details
-- **[PIA Template](docs/PIA_TEMPLATE.md)**: Privacy Impact Assessment methodology
-- **[Collibra Integration](docs/COLLIBRA_INTEGRATION.md)**: Data governance integration
-- **[Troubleshooting Guide](docs/TROUBLESHOOTING.md)**: Common issues and resolutions
-
----
 
 ## 🛠️ Technology Stack
 
@@ -350,49 +333,13 @@ def validate_row_counts(source_table, target_table):
 | **Data Warehouse** | BigQuery |
 | **ETL/ELT** | Cloud Dataflow, Apache Beam |
 | **Storage** | Cloud Storage, HDFS |
-| **Security** | Cloud DLP, Cloud IAM, Cloud KMS |
-| **IaC** | Terraform, Cloud Deployment Manager |
+| **Security** | Cloud DLP, Cloud IAM |
+| **IaC** | Terraform |
 | **Governance** | Collibra Data Intelligence Cloud |
 | **Monitoring** | Cloud Monitoring, Cloud Logging |
-| **CI/CD** | Cloud Build, GitHub Actions |
 | **Languages** | Python 3.9+, SQL, Bash, HCL |
 
 ---
 
-## 🤝 Contributing
 
-This is a portfolio/documentation project showcasing a completed enterprise migration. For questions or discussions about similar implementations, please open an issue.
 
----
-
-## 📄 License
-
-This project documentation is available under the MIT License. See [LICENSE](LICENSE) file for details.
-
----
-
-## 👤 Author
-
-**Your Name**  
-Senior Data Engineer | Cloud Architect  
-- LinkedIn: [your-linkedin](https://linkedin.com/in/yourprofile)
-- Email: your.email@example.com
-- Portfolio: [your-portfolio.com](https://yourportfolio.com)
-
----
-
-## 🏆 Project Outcomes
-
-✅ Successfully migrated 12.5 TB of healthcare data to GCP  
-✅ Achieved HIPAA/PHI compliance certification  
-✅ Implemented comprehensive PII/PHI masking across 85+ tables  
-✅ Reduced query performance times by 73%  
-✅ Decreased infrastructure costs by 68%  
-✅ Integrated with Collibra for enterprise data governance  
-✅ Zero data breaches or compliance violations post-migration  
-✅ Completed Privacy Impact Assessment with positive findings  
-
----
-
-**Last Updated**: February 2026  
-**Project Status**: ✅ Production | 🔒 Compliant | 📊 Fully Documented
