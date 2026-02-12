@@ -2,7 +2,7 @@
 
 # Key ring for GCS keys
 resource "google_kms_key_ring" "gcs_keyring" {
-  name     = "gcs-healthcare-keyring-${local.resource_suffix}"
+  name     = "gcs-telecom-keyring-${local.resource_suffix}"
   location = var.region
   project  = var.project_id
   
@@ -11,7 +11,7 @@ resource "google_kms_key_ring" "gcs_keyring" {
 
 # Crypto key for GCS
 resource "google_kms_crypto_key" "gcs_key" {
-  name            = "gcs-healthcare-key"
+  name            = "gcs-telecom-key"
   key_ring        = google_kms_key_ring.gcs_keyring.id
   rotation_period = var.kms_key_rotation_period
   
@@ -45,13 +45,13 @@ resource "google_kms_crypto_key_iam_member" "gcs_key_encrypter" {
 
 # Crypto key for Dataflow
 resource "google_kms_key_ring" "dataflow_keyring" {
-  name     = "dataflow-healthcare-keyring-${local.resource_suffix}"
+  name     = "dataflow-telecom-keyring-${local.resource_suffix}"
   location = var.region
   project  = var.project_id
 }
 
 resource "google_kms_crypto_key" "dataflow_key" {
-  name            = "dataflow-healthcare-key"
+  name            = "dataflow-telecom-key"
   key_ring        = google_kms_key_ring.dataflow_keyring.id
   rotation_period = var.kms_key_rotation_period
   
