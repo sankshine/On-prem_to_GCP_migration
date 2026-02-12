@@ -1,6 +1,6 @@
 # Temporary storage for Dataflow
 resource "google_storage_bucket" "dataflow_temp" {
-  name          = "healthcare-dataflow-temp-${var.project_id}"
+  name          = "telecom-dataflow-temp-${var.project_id}"
   location      = var.region
   force_destroy = false
   
@@ -20,7 +20,7 @@ resource "google_storage_bucket" "dataflow_temp" {
 
 # GCS bucket for input data
 resource "google_storage_bucket" "dataflow_input" {
-  name          = "healthcare-input-${var.project_id}"
+  name          = "telecom-input-${var.project_id}"
   location      = var.region
   force_destroy = false
   
@@ -31,7 +31,7 @@ resource "google_storage_bucket" "dataflow_input" {
 
 # GCS bucket for output data
 resource "google_storage_bucket" "dataflow_output" {
-  name          = "healthcare-output-${var.project_id}"
+  name          = "telecom-output-${var.project_id}"
   location      = var.region
   force_destroy = false
   
@@ -52,7 +52,7 @@ resource "google_dataflow_flex_template_job" "pii_masking_pipeline" {
   parameters = {
     project_id     = var.project_id
     input_path     = "gs://${google_storage_bucket.dataflow_input.name}/hadoop-data/*.json"
-    output_table   = "${var.project_id}.prod_healthcare_data.patients"
+    output_table   = "${var.project_id}.prod_telecom_data.patients"
     dlp_template   = google_data_loss_prevention_inspect_template.pii_detection.name
     crypto_key     = google_kms_crypto_key.dataflow_key.id
     secret_key     = random_password.pseudonymization_secret.result
@@ -77,8 +77,8 @@ resource "random_password" "pseudonymization_secret" {
 
 # Service account for Dataflow workers
 resource "google_service_account" "dataflow_worker" {
-  account_id   = "healthcare-dataflow-worker-${local.resource_suffix}"
-  display_name = "Healthcare Dataflow Worker"
+  account_id   = "telecom-dataflow-worker-${local.resource_suffix}"
+  display_name = "telecom Dataflow Worker"
 }
 
 # Grant necessary permissions to Dataflow worker
